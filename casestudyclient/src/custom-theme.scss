@@ -1,0 +1,114 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+// Create nested scss map
+$primary: ( // red-damask
+  50: #fcfcfc,
+  100: #f7f7f7,
+  200: #f2f2f2,
+  300: #ececec,
+  400: #cacaca,
+  500: #adadad,
+  600: #838383,
+  700: #6e6e6e,
+  800: #4e4e4e,
+  900: #2c2c2c, // This
+  A100 : #f7f7f7,
+  A200 : #f2f2f2,
+  A400 : #cacaca,
+  A700 : #6e6e6e,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #ffffff,
+  ),
+  light: #555555,
+  dark:#000000
+);
+
+$secondary: (
+  50: #f8eef0,
+  100: #f0d3d9,
+  200: #daa5a9,
+  300: #ca8589,
+  400: #d36e70,
+  500: #d7645f,
+  600: #c85c5c,
+  700: #b65454, // This
+  800: #a84f4e,
+  900: #954946,
+  A100 : #ffffff,
+  A200 : #daa5a9,
+  A400 : #d36e70,
+  A700 : #b65454,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #ffffff,
+  )
+);
+
+$tertiary: (
+  50: #fff3e0,
+  100: #ffe0b2,
+  200: #ffcc80,
+  300: #ffb74d,
+  400: #ffa726,
+  500: #ff9800,
+  600: #fb8c00,
+  700: #f57c00, // This
+  800: #ef6c00,
+  900: #e65100,
+  A100 : #ffd180,
+  A200 : #ffab40,
+  A400 : #ff9100,
+  A700 : #ff6d00,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+/* ======== Angular material custom themes ======== */ 
+/* colour names and values from */ 
+/* https://material.io/design/color/the-color-system.html#color-theme-creation */
+$my-app-primary: mat-palette($primary, 900);
+/* main shade, the lighter shade, the darker shade */
+$my-app-accent: mat-palette($secondary, 600, 700, 800);
+$my-app-warn: mat-palette($tertiary,700); // , 400
+$my-custom-theme: mat-dark-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-custom-theme);

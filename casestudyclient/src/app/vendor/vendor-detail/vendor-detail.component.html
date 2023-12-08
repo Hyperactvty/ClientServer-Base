@@ -1,0 +1,206 @@
+<form [formGroup]="vendorForm" (ngSubmit)="updateSelectedVendor()">
+  <div layout="row">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Name"
+        type="text"
+        required
+        formControlName="name"
+      />
+      <mat-error
+        *ngIf="name.errors && (name.dirty || name.touched)"
+        align="end"
+      >
+        Name is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Address #1"
+        type="text"
+        required
+        formControlName="address1"
+      />
+      <mat-error
+        *ngIf="address1.errors && (address1.dirty || address1.touched)"
+        align="end"
+      >
+        Address #1 is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="City"
+        type="text"
+        required
+        formControlName="city"
+      />
+      <mat-error
+        *ngIf="city.errors && (city.dirty || city.touched)"
+        align="end"
+      >
+        City is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <!-- <mat-select matInput placeholder="Province" formControlName="province" flex>
+      <mat-option value="AB">Alberta</mat-option>
+      <mat-list-option value="BC">British Columbia</mat-list-option>
+      <mat-list-option value="NS">Nova Scotia</mat-list-option>
+      <mat-list-option value="NB">New Brunswick</mat-list-option>
+      <mat-list-option value="MB">Manitoba</mat-list-option>
+      <mat-list-option value="PE">Prince Edward Island</mat-list-option>
+      <mat-list-option value="SK">Saskatchewan</mat-list-option>
+      <mat-list-option value="NL">Newfoundland and Labrador</mat-list-option>
+      <mat-list-option value="ON">Ontario</mat-list-option>
+      <mat-list-option value="QU">Quebec</mat-list-option>
+    </mat-select> -->
+      <mat-select
+        placeholder="Province"
+        [(ngModel)]="selectedProvince"
+        formControlName="province"
+      >
+        <mat-option *ngFor="let province of provinces" [value]="province.value">
+          {{ province.viewValue }}
+        </mat-option>
+      </mat-select>
+
+      <mat-error
+        *ngIf="province.errors && (province.dirty || province.touched)"
+        align="end"
+      >
+        Province is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div layout="row">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Postal Code"
+        type="text"
+        required
+        formControlName="postalcode"
+      />
+      <mat-error
+        *ngIf="postalcode.errors && (postalcode.dirty || postalcode.touched)"
+        align="end"
+      >
+      <p *ngIf="postalcode.hasError('required')">Postal Code is required</p>
+      <p
+        *ngIf="!postalcode.hasError('required') && postalcode.hasError('invalidPostalcode')"
+      >
+        needs format - X#X-#X#
+      </p>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Phone #"
+        type="text"
+        required
+        formControlName="phone"
+      />
+      <mat-error
+        *ngIf="phone.errors && (phone.dirty || phone.touched)"
+        align="end"
+      >
+        <p *ngIf="phone.hasError('required')">Phone # is required</p>
+        <p
+          *ngIf="!phone.hasError('required') && phone.hasError('invalidPhone')"
+        >
+          needs format - (###)###-####
+        </p>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <!-- <input
+        matInput
+        placeholder="Type"
+        type="text"
+        required
+        formControlName="type"
+      /> -->
+      <mat-select
+        placeholder="Type"
+        [(ngModel)]="selectedType"
+        formControlName="type"
+      >
+        <mat-option *ngFor="let type of typeValues" [value]="type.value">
+          {{ type.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="type.errors && (type.dirty || type.touched)"
+        align="end"
+      >
+        Type is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div layout="row">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Email"
+        type="email"
+        required
+        formControlName="email"
+      />
+      <mat-error
+        *ngIf="email.errors && (email.dirty || email.touched)"
+        align="end"
+      >
+        <p *ngIf="email.hasError('required')">Email is required.</p>
+        <p
+          *ngIf="
+            !email.hasError('required') && email.hasError('invalidEmail')
+          "
+        >
+          needs format - xx@xx.xx
+        </p>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="mat-pad-sm">
+    <span>
+      <button
+        mat-raised-button
+        type="button"
+        (click)="updateSelectedVendor()"
+        [disabled]="!vendorForm.valid"
+      >
+        Save
+      </button>
+    </span>
+
+    <span>
+      <button *ngIf="selectedVendor.id" mat-raised-button type="button" 
+     (click)="openDeleteDialog(selectedVendor)">Delete</button>
+      </span>
+    <span>
+      <button
+        mat-raised-button
+        type="button"
+        (click)="cancelled.emit(selectedVendor)"
+      >
+        Cancel
+      </button>
+    </span>
+  </div>
+</form>
